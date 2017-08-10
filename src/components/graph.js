@@ -192,7 +192,7 @@ class Graph extends Component {
         var self = this;
         
 		return (
-			<table className="graph" >
+			<table className="graph" onMouseLeave={this._mouseUp}>
                 <tbody>
                 {
                     rows.map(function(r, y) {
