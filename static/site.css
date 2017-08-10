@@ -1,0 +1,30 @@
+body {
+    font-size: 12px;
+}
+table {
+    border-collapse: collapse;
+}
+table, th, td {
+    border: 1px solid #000;
+}
+th, td {
+    padding: 6px;
+}
+.node-start {
+    background: green;
+}
+.node-end {
+    background: red;
+}
+.node-obstacle {
+    background: black;
+}
+.node-opened {
+    background: pink;
+}
+.node-searched {
+    background: orange;
+}
+.node-shortest {
+    background: blue;
+}
