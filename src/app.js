@@ -9,20 +9,19 @@ class App extends Component {
         this.state = {
             paintOption: "start"
         };
-        this._changePaintOption = this._changePaintOption.bind(this);
+        this._clickPaintOption = this._clickPaintOption.bind(this);
     }
     
-    _changePaintOption(e) {
-        console.log(e.target.value);
+    _clickPaintOption(e) {
         this.setState({paintOption: e.target.value});
     }
     
     render() {
         return (
           <div>
-            <h1>Pathfinding</h1>
+            <h1>A* Pathfinding</h1>
+            <Controls click={this._clickPaintOption} paintOption={this.state.paintOption} />
             <Graph rows={25} columns={30} paintOption={this.state.paintOption} />
-            <Controls change={this._changePaintOption} paintOption={this.state.paintOption} />
           </div>
         );
     }

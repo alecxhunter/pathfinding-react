@@ -8,13 +8,18 @@ class Controls extends Component {
     render() {
         return (
         <div className="controls">
-            
-            <select onChange={this.props.change} value={this.props.paintOption}>
-                <option value="start">Start Position</option>
-                <option value="end">End Position</option>
-                <option value="obstacle">Obstacle Position</option>
-                <option value="erase">Erase</option>
-            </select>
+            <label className="radio-inline">
+                <input type="radio" checked={this.props.paintOption === "start"} name="paintOptions" value="start" onClick={this.props.click} />Start Position
+            </label>
+            <label className="radio-inline">
+                <input type="radio" checked={this.props.paintOption === "end"} name="paintOptions" value="end" onClick={this.props.click} />End Position
+            </label>
+            <label className="radio-inline">
+                <input type="radio" checked={this.props.paintOption === "obstacle"} name="paintOptions" value="obstacle" onClick={this.props.click} />Obstacle Position
+            </label>
+            <label className="radio-inline">
+                <input type="radio" checked={this.props.paintOption === "erase"} name="paintOptions" value="erase" onClick={this.props.click} />Erase
+            </label>
         </div>
         );
     }

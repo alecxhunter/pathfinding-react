@@ -2,11 +2,15 @@ import React, {Component} from 'react';
 import Node from './node';
 
 class Graph extends Component {
+    
 	constructor(props) {
 		super(props);
         
         this._handleNodeClick = this._handleNodeClick.bind(this);
         this._findNode = this._findNode.bind(this);
+        this._mouseUp = this._mouseUp.bind(this);
+        this._mouseDown = this._mouseDown.bind(this);
+        this._mouseMove = this._mouseMove.bind(this);
         
         var nodes = [];
         for (var i = 0; i < props.rows * props.columns; i++) {
@@ -25,7 +29,10 @@ class Graph extends Component {
         }        
         
 		this.state = {
-            nodes: nodes
+            nodes: nodes,
+            mouseDragFlag: false,
+            mouseDragLastX: -1,
+            mouseDragLastY: -1
         };
         
         for (var i = 0; i < nodes.length; i++) {
@@ -158,14 +165,34 @@ class Graph extends Component {
             nodes: nodes
         });
     }
-	
+    
+    _mouseUp() {
+        this.state.mouseDragFlag = false;
+    }
+    
+    _mouseDown(x, y) {
+        this.state.mouseDragFlag = true;
+        this._handleNodeClick(x, y);
+    }
+    
+    _mouseMove(x, y) {
+        if (this.state.mouseDragFlag) {
+            if (this.state.mouseDragLastX !== x || this.state.mouseDragLastY !== y)
+                this._handleNodeClick(x, y);
+        }
+        this.setState({
+            mouseDragLastX: x,
+            mouseDragLastY: y,
+        });
+    }
+
 	render() {
         var rows = Array.apply(null, {length: this.props.rows});
         var columns = Array.apply(null, {length: this.props.columns});
         var self = this;
         
 		return (
-			<table className="graph">
+			<table className="graph" >
                 <tbody>
                 {
                     rows.map(function(r, y) {
@@ -176,7 +203,7 @@ class Graph extends Component {
                                 var node = self._findNode(x, y);
                             
                                 return (
-                                <Node key={x} click={self._handleNodeClick} attrs={node} />
+                                <Node key={x} attrs={node} mouseUp={self._mouseUp} mouseDown={self._mouseDown} mouseMove={self._mouseMove} />
                                 );
                             })
                         }

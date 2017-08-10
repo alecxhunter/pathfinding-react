@@ -11,10 +11,20 @@ class Node extends Component {
             obstacle: false
         };
         this._handleClick = this._handleClick.bind(this);
+        this._mouseMove = this._mouseMove.bind(this);
+        this._mouseDown = this._mouseDown.bind(this);
     }
     
     _handleClick() {
         this.props.click(this.props.attrs.x, this.props.attrs.y);
+    }
+    
+    _mouseMove(e) {
+        this.props.mouseMove(this.props.attrs.x, this.props.attrs.y);
+    }
+    
+    _mouseDown(e) {
+        this.props.mouseDown(this.props.attrs.x, this.props.attrs.y);
     }
     
     render() {
@@ -28,8 +38,8 @@ class Node extends Component {
         });
         
         return (
-            <td onClick={this._handleClick} className={classes}>
-                <span>{this.props.attrs.f}</span>
+            <td className={classes} onMouseUp={this.props.mouseUp} onMouseDown={this._mouseDown} onMouseMove={this._mouseMove}>
+                <span>{!this.props.attrs.obstacle ? this.props.attrs.f : ""}</span>
             </td>
         );
     }
