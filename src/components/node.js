@@ -32,7 +32,7 @@ class Node extends Component {
             "node-start": this.props.attrs.start,
             "node-end": this.props.attrs.end,
             "node-obstacle": this.props.attrs.obstacle,
-            "node-opened": this.props.attrs.opened && !this.props.attrs.start && !this.props.attrs.end,
+            "node-opened": this.props.attrs.opened && !this.props.attrs.start && !this.props.attrs.end && !this.props.attrs.searched,
             "node-searched": this.props.attrs.searched && !this.props.attrs.start && !this.props.attrs.end,
             "node-shortest": this.props.attrs.shortestPath && !this.props.attrs.start && !this.props.attrs.end
         });

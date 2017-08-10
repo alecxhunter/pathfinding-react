@@ -14,22 +14,22 @@ th, td {
     text-align: center;
 }
 .node-start {
-    background: green;
+    background: #47ca47;
 }
 .node-end {
-    background: red;
+    background: #e83737;
 }
 .node-obstacle {
     background: black;
 }
 .node-opened {
-    background: pink;
+    background: #fdc166;
 }
 .node-searched {
-    background: orange;
+    background: #f9e47a;
 }
 .node-shortest {
-    background: blue;
+    background: #78abf9;
 }
 
 .graph {
