@@ -25,6 +25,7 @@ class Graph extends Component {
             node.g = 0;
             node.h = 0;
             node.f = node.g + node.h;
+            node.neighbors = [];
             nodes.push(node);
         }        
         
@@ -35,11 +36,21 @@ class Graph extends Component {
             mouseDragLastY: -1
         };
         
+        // Add all neighbors 
         for (var i = 0; i < nodes.length; i++) {
-            nodes[i].up = this._findNode(nodes[i].x, nodes[i].y - 1);
-            nodes[i].right = this._findNode(nodes[i].x + 1, nodes[i].y);
-            nodes[i].down = this._findNode(nodes[i].x, nodes[i].y + 1);
-            nodes[i].left = this._findNode(nodes[i].x - 1, nodes[i].y);
+            // UP
+            nodes[i].neighbors.push(this._findNode(nodes[i].x, nodes[i].y - 1));
+            // RIGHT
+            nodes[i].neighbors.push(this._findNode(nodes[i].x + 1, nodes[i].y));
+            // DOWN
+            nodes[i].neighbors.push(this._findNode(nodes[i].x, nodes[i].y + 1));
+            // LEFT
+            nodes[i].neighbors.push(this._findNode(nodes[i].x - 1, nodes[i].y));
+            
+            nodes[i].neighbors = nodes[i].neighbors.filter(function(node) {
+                return node !== null;
+            });
+
         }
 	}
     
@@ -125,32 +136,15 @@ class Graph extends Component {
             }
             
             current.searched = true;
+            current.neighbors.forEach(function(node) {
+                if (!node.opened && !node.obstacle) {
+                    node.opened = true;
+                    node.parent = current;
+                    node.costSoFar = current.costSoFar + 1;
+                    openNodes.push(node);
+                }
+            });
             
-            if (current.up && !current.up.opened && !current.up.obstacle) {
-				current.up.opened = true;
-				current.up.parent = current;
-				current.up.costSoFar = current.costSoFar + 1;
-				openNodes.push(current.up);
-			}
-			if (current.right && !current.right.searched && !current.right.obstacle) {
-				current.right.opened = true;
-				current.right.parent = current;
-				current.right.costSoFar = current.costSoFar + 1;
-				openNodes.push(current.right);
-			}
-			if (current.down && !current.down.opened && !current.down.obstacle) {
-				current.down.opened = true;
-				current.down.parent = current;
-				current.down.costSoFar = current.costSoFar + 1;
-				openNodes.push(current.down);
-			}
-			if (current.left && !current.left.opened && !current.left.obstacle) {
-				current.left.opened = true;
-				current.left.parent = current;
-				current.left.costSoFar = current.costSoFar + 1;
-				openNodes.push(current.left);
-			}
-
 			openNodes.sort(function(a, b) {
 				return (a.f + a.costSoFar) - (b.f + b.costSoFar);
 			});
