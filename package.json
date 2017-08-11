@@ -4,7 +4,7 @@
   "description": "Example implementation of pathfinding algorithms",
   "main": "index.js",
   "scripts": {
-	"build": "webpack",
+    "build": "webpack -p --config ./webpack.prod.config.js --progress --profile --colors",
 	"serve": "serve ./static",
     "start": "webpack-dev-server --hot --watch-poll --inline"
   },

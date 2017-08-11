@@ -128,6 +128,7 @@ class Graph extends Component {
         
         start.opened = true;
         openNodes.push(start);
+        
         while (openNodes.length != 0) {
             current = openNodes.shift();
             if (current.end) {
