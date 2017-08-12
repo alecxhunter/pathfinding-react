@@ -7,7 +7,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            paintOption: "start"
+            paintOption: 'start'
         };
         this._clickPaintOption = this._clickPaintOption.bind(this);
     }
@@ -20,8 +20,13 @@ class App extends Component {
         return (
           <div>
             <h1>A* Pathfinding</h1>
-            <Controls click={this._clickPaintOption} paintOption={this.state.paintOption} />
-            <Graph rows={25} columns={30} paintOption={this.state.paintOption} />
+            <Controls 
+                click={this._clickPaintOption} 
+                paintOption={this.state.paintOption} />
+            <Graph 
+                rows={25} 
+                columns={30} 
+                paintOption={this.state.paintOption} />
           </div>
         );
     }

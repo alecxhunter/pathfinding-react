@@ -57,30 +57,30 @@ class Graph extends Component {
     _handleNodeClick(x, y) {
         var props = this.props;
         var nodes = this.state.nodes.slice();
-        console.log("Clicked (", x, ", ", y, ")");
+        console.log('Clicked (', x, ', ', y, ')');
         
         nodes.forEach(function(node, idx) {
             switch(props.paintOption) {
-                case "start":
+                case 'start':
                     if (node.x === x && node.y === y)
                         node.start = true;
                     else
                         node.start = false;
                     break;
-                case "end":
+                case 'end':
                     if (node.x === x && node.y === y)
                         node.end = true;
                     else
                         node.end = false;
                     break;
-                case "obstacle":
+                case 'obstacle':
                     if (node.x === x && node.y === y) {
                         node.obstacle = true;
                         node.start = false;
                         node.end = false;
                     }
                     break;
-                case "erase":
+                case 'erase':
                     if (node.x === x && node.y === y) {
                         node.start = false;
                         node.end = false;
@@ -105,12 +105,8 @@ class Graph extends Component {
     }
     
     _executeSearch() {
-        var start = this.state.nodes.filter(function(node) { 
-            return node.start; 
-        })[0];
-        var end = this.state.nodes.filter(function(node) { 
-            return node.end; 
-        })[0];
+        var start = this.state.nodes.filter(node => { return node.start; })[0];
+        var end = this.state.nodes.filter(node => { return node.end; })[0];
         var current;
         var openNodes = [];
         var nodes = this.state.nodes.slice();
@@ -132,7 +128,7 @@ class Graph extends Component {
         while (openNodes.length != 0) {
             current = openNodes.shift();
             if (current.end) {
-                console.log("Reached the end!");
+                console.log('Reached the end!');
                 break;
             }
             

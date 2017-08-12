@@ -29,17 +29,17 @@ class Node extends Component {
     
     render() {
         var classes = classNames({
-            "node-start": this.props.attrs.start,
-            "node-end": this.props.attrs.end,
-            "node-obstacle": this.props.attrs.obstacle,
-            "node-opened": this.props.attrs.opened && !this.props.attrs.start && !this.props.attrs.end && !this.props.attrs.searched,
-            "node-searched": this.props.attrs.searched && !this.props.attrs.start && !this.props.attrs.end,
-            "node-shortest": this.props.attrs.shortestPath && !this.props.attrs.start && !this.props.attrs.end
+            'node-start': this.props.attrs.start,
+            'node-end': this.props.attrs.end,
+            'node-obstacle': this.props.attrs.obstacle,
+            'node-opened': this.props.attrs.opened && !this.props.attrs.start && !this.props.attrs.end && !this.props.attrs.searched,
+            'node-searched': this.props.attrs.searched && !this.props.attrs.start && !this.props.attrs.end,
+            'node-shortest': this.props.attrs.shortestPath && !this.props.attrs.start && !this.props.attrs.end
         });
         
         return (
             <td className={classes} onMouseUp={this.props.mouseUp} onMouseDown={this._mouseDown} onMouseMove={this._mouseMove}>
-                <span>{!this.props.attrs.obstacle ? this.props.attrs.f : ""}</span>
+                <span>{!this.props.attrs.obstacle ? this.props.attrs.f : ''}</span>
             </td>
         );
     }
